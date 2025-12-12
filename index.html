@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Legitimacy Checker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-shield-check me-2"></i>
+        Loan Legitimacy Checker
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#history">History</a>
+          </li>
+          <li class="nav-item d-flex align-items-center ms-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="darkModeToggle">
+              <label class="form-check-label text-light" for="darkModeToggle">
+                <i class="bi bi-moon-stars"></i>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="container mt-4">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">Verify Your Loan Before You Sign</h1>
+        <p class="lead">Our AI-powered tool helps you identify legitimate loan offers from potential scams by analyzing key factors and learning from past data.</p>
+        <a href="#checkLoan" class="btn btn-primary btn-lg mt-2">
+          <i class="bi bi-search me-2"></i>Check Your Loan
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="img-fluid rounded" alt="Loan verification illustration">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mt-5" id="checkLoan">
+    <div class="row">
+      <!-- Loan Check Form -->
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h3 class="card-title mb-0">
+              <i class="bi bi-clipboard-check me-2"></i>
+              Loan Legitimacy Check
+            </h3>
+          </div>
+          <div class="card-body">
+            <form id="loanForm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="nbfcName" class="form-label">NBFC/Lender Name <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Enter the exact name of the financial institution offering the loan"></i></label>
+                  <input type="text" class="form-control" id="nbfcName" placeholder="e.g. Bajaj Finance Ltd." required>
+                  <div id="nbfcSuggestions" class="list-group mt-1"></div>
+                </div>
+                <div class="col-md-6">
+                  <label for="interestRate" class="form-label">Interest Rate (% per annum) <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Annual interest rate offered"></i></label>
+                  <input type="number" class="form-control" id="interestRate" min="0" max="100" step="0.01" placeholder="e.g. 12.5" required>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="loanAmount" class="form-label">Loan Amount (₹) <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Total loan amount being offered"></i></label>
+                  <input type="number" class="form-control" id="loanAmount" min="1000" placeholder="e.g. 100000" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="repaymentDuration" class="form-label">Repayment Duration (months) <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Total duration for loan repayment"></i></label>
+                  <input type="number" class="form-control" id="repaymentDuration" min="1" placeholder="e.g. 24" required>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="processingFee" class="form-label">Processing Fee (%) <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Fee charged for processing the loan"></i></label>
+                  <input type="number" class="form-control" id="processingFee" min="0" max="100" step="0.01" placeholder="e.g. 2.5" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="disbursalTime" class="form-label">Promised Disbursal Time (days) <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Time promised for loan disbursal after approval"></i></label>
+                  <input type="number" class="form-control" id="disbursalTime" min="0" placeholder="e.g. 3" required>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">App Permissions Required <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Permissions requested by the lender's app"></i></label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="accessContacts">
+                    <label class="form-check-label" for="accessContacts">Access to Contacts</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="accessPhotos">
+                    <label class="form-check-label" for="accessPhotos">Access to Photos/Gallery</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="accessLocation">
+                    <label class="form-check-label" for="accessLocation">Access to Location</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Documents Required <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Documents requested by the lender"></i></label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="requiresAadhaar" checked disabled>
+                    <label class="form-check-label" for="requiresAadhaar">Aadhaar Card</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="requiresPAN" checked disabled>
+                    <label class="form-check-label" for="requiresPAN">PAN Card</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="requiresBankStatement">
+                    <label class="form-check-label" for="requiresBankStatement">Bank Statement</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <label for="additionalNotes" class="form-label">Additional Notes <i class="bi bi-info-circle tooltip-icon" data-bs-toggle="tooltip" title="Any other details about the loan offer"></i></label>
+                  <textarea class="form-control" id="additionalNotes" rows="2" placeholder="Enter any additional details about the loan offer..."></textarea>
+                </div>
+              </div>
+              
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="bi bi-shield-check me-2"></i>Verify Loan Legitimacy
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Results Section -->
+      <div class="col-lg-4">
+        <div class="card mb-4 result-card" id="resultCard" style="display: none;">
+          <div class="card-header bg-white">
+            <h4 class="card-title mb-0" id="resultTitle">Analysis Result</h4>
+          </div>
+          <div class="card-body">
+            <div class="text-center mb-4">
+              <div id="resultIcon" class="mb-3"></div>
+              <h5 id="resultHeading">Analyzing your loan offer...</h5>
+              <p id="resultDescription" class="text-muted">Please wait while we process your information.</p>
+            </div>
+            
+            <h6>Legitimacy Score</h6>
+            <div class="progress mb-3">
+              <div id="legitimacyScore" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            
+            <div id="resultDetails">
+              <!-- Details will be populated by JavaScript -->
+            </div>
+            
+            <div class="mt-4">
+              <h6>Recommendation</h6>
+              <p id="recommendation" class="mb-0"></p>
+            </div>
+          </div>
+          <div class="card-footer bg-white">
+            <button class="btn btn-sm btn-outline-primary" id="saveResult">
+              <i class="bi bi-bookmark-plus me-1"></i>Save Result
+            </button>
+            <button class="btn btn-sm btn-outline-secondary ms-2" id="printResult">
+              <i class="bi bi-printer me-1"></i>Print
+            </button>
+          </div>
+        </div>
+        
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h5 class="card-title mb-0">
+              <i class="bi bi-info-circle me-2"></i>
+              Quick Tips
+            </h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item px-0">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Verify the lender is registered with RBI
+              </li>
+              <li class="list-group-item px-0">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Be cautious of interest rates below 7% or above 36%
+              </li>
+              <li class="list-group-item px-0">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Avoid lenders requesting upfront fees
+              </li>
+              <li class="list-group-item px-0">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Be wary of apps requesting excessive permissions
+              </li>
+              <li class="list-group-item px-0">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                Check for hidden charges in the loan agreement
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="container mt-5 py-5" id="about">
+    <h2 class="text-center mb-4">How It Works</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-database-check"></i>
+          </div>
+          <h4>Data Verification</h4>
+          <p>We verify the lender against our database of registered NBFCs and ARCs from the Reserve Bank of India.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <h4>Risk Analysis</h4>
+          <p>Our algorithm analyzes multiple factors including interest rates, processing fees, and app permissions to calculate risk.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 text-center p-4">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-robot"></i>
+          </div>
+          <h4>Machine Learning</h4>
+          <p>Our system learns from past scams and legitimate loans to continuously improve its prediction accuracy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Section -->
+  <div class="container mt-5 py-5 bg-light rounded" id="history">
+    <h2 class="text-center mb-4">Recent Scam Alerts</h2>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <div id="scamHistory">
+              <!-- Will be populated by JavaScript -->
+              <div class="text-center text-muted py-4">
+                <i class="bi bi-clock-history fs-1"></i>
+                <p class="mt-2">No recent scam alerts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white mt-5 py-4" id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Loan Legitimacy Checker</h5>
+          <p class="small">A tool to help you identify legitimate loan offers and avoid scams.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="small">© 2025 Loan Legitimacy Checker. All rights reserved.</p>
+          <p class="small">Disclaimer: This tool provides guidance only and should not be considered financial advice.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

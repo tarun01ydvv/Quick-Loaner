@@ -1,0 +1,185 @@
+:root {
+  --primary-color: #3a6ea5;
+  --secondary-color: #c0d6df;
+  --accent-color: #ff6b6b;
+  --light-bg: #f8f9fa;
+  --dark-bg: #212529;
+  --dark-card-bg: #2c3034;
+  --light-text: #f8f9fa;
+  --dark-text: #343a40;
+  --border-color: #dee2e6;
+  --dark-border-color: #495057;
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--light-text);
+}
+
+.navbar {
+  background-color: var(--primary-color);
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode .navbar {
+  background-color: #2c3e50;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .card {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-border-color);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #2c5282;
+  border-color: #2c5282;
+}
+
+.result-card {
+  border-left: 5px solid var(--primary-color);
+}
+
+.result-card.legitimate {
+  border-left-color: #28a745;
+}
+
+.result-card.suspicious {
+  border-left-color: #ffc107;
+}
+
+.result-card.fraudulent {
+  border-left-color: #dc3545;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.history-item {
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+}
+
+body.dark-mode .history-item {
+  border-bottom-color: var(--dark-border-color);
+}
+
+#loanForm label {
+  font-weight: 500;
+}
+
+.tooltip-icon {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.progress {
+  height: 8px;
+}
+
+body.dark-mode .card-header.bg-white,
+body.dark-mode .card-footer.bg-white {
+  background-color: var(--dark-card-bg) !important;
+}
+
+body.dark-mode .text-muted {
+  color: #adb5bd !important;
+}
+
+body.dark-mode .list-group-item {
+  background-color: transparent;
+  border-color: var(--dark-border-color);
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-check-input {
+  background-color: #343a40;
+  border-color: var(--dark-border-color);
+  color: var(--light-text);
+}
+
+body.dark-mode .form-control:focus {
+  background-color: #3a4147;
+  color: var(--light-text);
+}
+
+body.dark-mode .form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Dark mode toggle styles */
+#darkModeToggle {
+  cursor: pointer;
+}
+
+.form-switch .form-check-input {
+  width: 2.5em;
+  margin-left: -2.5em;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked {
+  background-position: right center;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* Additional dark mode styles */
+body.dark-mode #history {
+  background-color: var(--dark-card-bg) !important;
+}
+
+body.dark-mode .bg-light {
+  background-color: var(--dark-card-bg) !important;
+}
+
+body.dark-mode .btn-outline-primary {
+  color: #8ab4f8;
+  border-color: #8ab4f8;
+}
+
+body.dark-mode .btn-outline-primary:hover {
+  background-color: #8ab4f8;
+  color: var(--dark-bg);
+}
+
+body.dark-mode .btn-outline-secondary {
+  color: #adb5bd;
+  border-color: #adb5bd;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+  background-color: #adb5bd;
+  color: var(--dark-bg);
+}
+
+body.dark-mode footer {
+  background-color: #1a1d20 !important;
+}
